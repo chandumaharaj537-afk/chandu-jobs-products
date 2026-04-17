@@ -1,0 +1,74 @@
+// Version: 1.0.0
+type ApplyMethod__257219580 = {#email : Text; #url : Text};
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type JobCategory__520782693 = {#IT; #NonIT};
+type JobId__339598917 = Nat;
+type Job__268293683 =
+  {
+    applyMethod : ApplyMethod__257219580;
+    category : JobCategory__520782693;
+    company : Text;
+    description : Text;
+    id : JobId__339598917;
+    location : Text;
+    postedAt : Timestamp__301639476;
+    posterPrincipal : Principal;
+    requirements : Text;
+    salary : ?Text;
+    title : Text
+  };
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type ProductId__160010635 = Nat;
+type Product__684444131 =
+  {
+    category : Text;
+    description : Text;
+    id : ProductId__160010635;
+    imageUrls : [Text];
+    listedAt : Timestamp__301639476;
+    price : Float;
+    sellerContact : Text;
+    sellerName : Text;
+    sellerPrincipal : Principal;
+    title : Text
+  };
+type Timestamp__301639476 = Int;
+type UserProfile__25647973 =
+  {
+    bio : Text;
+    contactInfo : Text;
+    createdAt : Timestamp__301639476;
+    name : Text;
+    principal : Principal;
+    role : UserRole__400612410
+  };
+type UserRole__400612410 = {#employer; #jobSeeker; #seller};
+actor {
+  stable jobs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Job__268293683]];
+      var elementIndex : Nat__490723111
+    };
+  stable var nextJobId : Nat;
+  stable var nextProductId : Nat;
+  stable products :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Product__684444131]];
+      var elementIndex : Nat__490723111
+    };
+  stable profiles :
+    {
+      var root : Node__46230540<Principal, UserProfile__25647973>;
+      var size : Nat__490723111
+    };
+  stable var seeded : Bool
+};

@@ -1,0 +1,133 @@
+type UserRole = 
+ variant {
+   employer;
+   jobSeeker;
+   seller;
+ };
+type UserProfile = 
+ record {
+   bio: text;
+   contactInfo: text;
+   createdAt: Timestamp;
+   name: text;
+   "principal": principal;
+   role: UserRole;
+ };
+type UpsertProfileRequest = 
+ record {
+   bio: text;
+   contactInfo: text;
+   name: text;
+   role: UserRole;
+ };
+type UpdateProductRequest = 
+ record {
+   category: text;
+   description: text;
+   id: ProductId;
+   imageUrls: vec text;
+   price: float64;
+   sellerContact: text;
+   sellerName: text;
+   title: text;
+ };
+type UpdateJobRequest = 
+ record {
+   applyMethod: ApplyMethod;
+   category: JobCategory;
+   company: text;
+   description: text;
+   id: JobId;
+   location: text;
+   requirements: text;
+   salary: opt text;
+   title: text;
+ };
+type Timestamp = int;
+type ProductId = nat;
+type ProductFilter = 
+ record {
+   category: opt text;
+   keyword: opt text;
+ };
+type Product = 
+ record {
+   category: text;
+   description: text;
+   id: ProductId;
+   imageUrls: vec text;
+   listedAt: Timestamp;
+   price: float64;
+   sellerContact: text;
+   sellerName: text;
+   sellerPrincipal: principal;
+   title: text;
+ };
+type JobId = nat;
+type JobFilter = 
+ record {
+   category: opt JobCategory;
+   keyword: opt text;
+   location: opt text;
+ };
+type JobCategory = 
+ variant {
+   IT;
+   NonIT;
+ };
+type Job = 
+ record {
+   applyMethod: ApplyMethod;
+   category: JobCategory;
+   company: text;
+   description: text;
+   id: JobId;
+   location: text;
+   postedAt: Timestamp;
+   posterPrincipal: principal;
+   requirements: text;
+   salary: opt text;
+   title: text;
+ };
+type CreateProductRequest = 
+ record {
+   category: text;
+   description: text;
+   imageUrls: vec text;
+   price: float64;
+   sellerContact: text;
+   sellerName: text;
+   title: text;
+ };
+type CreateJobRequest = 
+ record {
+   applyMethod: ApplyMethod;
+   category: JobCategory;
+   company: text;
+   description: text;
+   location: text;
+   requirements: text;
+   salary: opt text;
+   title: text;
+ };
+type ApplyMethod = 
+ variant {
+   email: text;
+   url: text;
+ };
+service : {
+  createJob: (req: CreateJobRequest) -> (Job);
+  createProduct: (req: CreateProductRequest) -> (Product);
+  deleteJob: (id: JobId) -> (bool);
+  deleteProduct: (id: ProductId) -> (bool);
+  getJob: (id: JobId) -> (opt Job) query;
+  getMyProfile: () -> (opt UserProfile) query;
+  getProduct: (id: ProductId) -> (opt Product) query;
+  getProfile: ("principal": principal) -> (opt UserProfile) query;
+  initSeed: () -> ();
+  listJobs: (filter: JobFilter) -> (vec Job) query;
+  listProducts: (filter: ProductFilter) -> (vec Product) query;
+  updateJob: (req: UpdateJobRequest) -> (bool);
+  updateProduct: (req: UpdateProductRequest) -> (bool);
+  upsertProfile: (req: UpsertProfileRequest) -> (UserProfile);
+}

@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "DM Sans";
+    --font-mono: "Geist Mono";
+    --radius: 0.5rem;
+
+    /* Light mode — warm ivory with royal gold primary */
+    --background: 0.97 0.008 285;
+    --foreground: 0.12 0.02 285;
+    --card: 1.0 0.0 0;
+    --card-foreground: 0.12 0.02 285;
+    --popover: 1.0 0.0 0;
+    --popover-foreground: 0.12 0.02 285;
+
+    /* Royal gold primary */
+    --primary: 0.72 0.18 60;
+    --primary-foreground: 0.1 0.02 285;
+
+    --secondary: 0.94 0.015 285;
+    --secondary-foreground: 0.22 0.02 285;
+    --muted: 0.94 0.012 285;
+    --muted-foreground: 0.48 0.015 285;
+
+    --accent: 0.72 0.18 60;
+    --accent-foreground: 0.1 0.02 285;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0.005 25;
+
+    --border: 0.88 0.015 285;
+    --input: 0.88 0.015 285;
+    --ring: 0.72 0.18 60;
+
+    --chart-1: 0.65 0.22 40;
+    --chart-2: 0.65 0.18 145;
+    --chart-3: 0.75 0.15 85;
+    --chart-4: 0.65 0.18 280;
+    --chart-5: 0.58 0.15 25;
+
+    --sidebar: 0.97 0.008 285;
+    --sidebar-foreground: 0.12 0.02 285;
+    --sidebar-primary: 0.72 0.18 60;
+    --sidebar-primary-foreground: 0.1 0.02 285;
+    --sidebar-accent: 0.94 0.015 285;
+    --sidebar-accent-foreground: 0.22 0.02 285;
+    --sidebar-border: 0.88 0.015 285;
+    --sidebar-ring: 0.72 0.18 60;
+  }
+
+  .dark {
+    /* Royal dark — deep navy-purple background, gold primary */
+    --background: 0.1 0.028 285;
+    --foreground: 0.95 0.008 285;
+    --card: 0.14 0.03 285;
+    --card-foreground: 0.95 0.008 285;
+    --popover: 0.17 0.034 285;
+    --popover-foreground: 0.95 0.008 285;
+
+    /* Royal gold */
+    --primary: 0.8 0.175 60;
+    --primary-foreground: 0.1 0.028 285;
+
+    --secondary: 0.19 0.034 285;
+    --secondary-foreground: 0.82 0.01 285;
+    --muted: 0.19 0.03 285;
+    --muted-foreground: 0.52 0.015 285;
+
+    --accent: 0.8 0.175 60;
+    --accent-foreground: 0.1 0.028 285;
+
+    --destructive: 0.55 0.2 25;
+    --destructive-foreground: 0.95 0.01 25;
+
+    --border: 0.24 0.038 285;
+    --input: 0.24 0.038 285;
+    --ring: 0.8 0.175 60;
+
+    --chart-1: 0.8 0.175 60;
+    --chart-2: 0.65 0.18 145;
+    --chart-3: 0.72 0.17 70;
+    --chart-4: 0.65 0.18 280;
+    --chart-5: 0.58 0.15 25;
+
+    --sidebar: 0.14 0.03 285;
+    --sidebar-foreground: 0.95 0.008 285;
+    --sidebar-primary: 0.8 0.175 60;
+    --sidebar-primary-foreground: 0.1 0.028 285;
+    --sidebar-accent: 0.19 0.034 285;
+    --sidebar-accent-foreground: 0.82 0.01 285;
+    --sidebar-border: 0.24 0.038 285;
+    --sidebar-ring: 0.8 0.175 60;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  @font-face {
+    font-family: "Space Grotesk";
+    src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "DM Sans";
+    src: url("/assets/fonts/DMSans.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Geist Mono";
+    src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  /* Smooth transition utility */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Royal card with subtle gold border glow */
+  .card-elevated {
+    @apply bg-card border border-border shadow-sm rounded-lg;
+  }
+
+  /* Royal gradient border card */
+  .card-royal {
+    @apply bg-card rounded-xl shadow-lg;
+    border: 1px solid oklch(var(--border));
+    box-shadow: 0 0 0 1px oklch(var(--primary) / 0.08), 0 4px 24px
+      oklch(var(--primary) / 0.06);
+  }
+
+  /* Amber badge — Jobs */
+  .badge-jobs {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300;
+  }
+
+  /* Emerald badge — Products */
+  .badge-products {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300;
+  }
+
+  /* Royal gold glow on hover */
+  .hover-royal {
+    @apply transition-smooth;
+  }
+  .hover-royal:hover {
+    box-shadow: 0 0 0 1px oklch(var(--primary) / 0.35), 0 4px 20px
+      oklch(var(--primary) / 0.15);
+  }
+
+  /* Decorative royal gradient used for hero and banners */
+  .royal-gradient {
+    background: radial-gradient(
+        ellipse 80% 60% at 50% -10%,
+        oklch(var(--primary) / 0.18) 0%,
+        transparent 70%
+      ), oklch(var(--background));
+  }
+
+  /* Gold shimmer text */
+  .text-gold {
+    background: linear-gradient(
+      135deg,
+      oklch(0.82 0.18 60),
+      oklch(0.72 0.2 50),
+      oklch(0.85 0.14 70)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Shadow utility for subtle elevation */
+  .shadow-subtle {
+    box-shadow: 0 1px 3px oklch(0 0 0 / 0.12), 0 1px 2px oklch(0 0 0 / 0.08);
+  }
+}
